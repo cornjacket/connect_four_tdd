@@ -19,12 +19,12 @@ module ConnectFour
         expect(board.grid).to eq "blah"
       end
     end
-=begin
-    context "#get_cell" do
+
+    context "cell" do
       it "returns the cell based on the (x,y) coordinate" do
-        grid = [ ["", "", ""], ["", "", "something"], ["", "", ""] ]
+        grid = [ ["", "", "", ""], ["", "", "something", ""], ["", "", "", ""] ]
         board = Board.new(grid: grid)
-        expect(board.get_cell(2,1)).to eq "something"
+        expect(board.cell(2,1)).to eq "something"
       end
     end
 
@@ -37,7 +37,7 @@ module ConnectFour
         expect(board.get_cell(0,0).value).to eq "meow"
       end
     end
-
+=begin
     TestCell = Struct.new(:value)
     let(:x_cell) { TestCell.new("X") }
     let(:y_cell) { TestCell.new("Y") }

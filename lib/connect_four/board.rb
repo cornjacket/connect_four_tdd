@@ -5,11 +5,11 @@ module ConnectFour
   	  @grid = input.fetch(:grid, default_grid)
   	end
 
-=begin
-    def get_cell(x, y)
+
+    def cell(x, y)
       grid[y][x]
     end
-
+=begin
     def set_cell(x, y, value)
       get_cell(x, y).value = value
     end
