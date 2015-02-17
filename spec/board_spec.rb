@@ -20,7 +20,7 @@ module ConnectFour
       end
     end
 
-    context "cell" do
+    context "get_cell" do
       it "returns the cell based on the (x,y) coordinate" do
         grid = [ ["", "", "", ""], ["", "", "something", ""], ["", "", "", ""] ]
         board = Board.new(grid: grid)
@@ -28,22 +28,32 @@ module ConnectFour
       end
     end
 
-    context "#cell=" do
-      it "it updates the value of the cell object at a (x,y) coordinate" do
-        Cat = Struct.new(:value) # what does this do?
-        grid = [ [Cat.new("cool"), "", ""], ["", "", ""], ["", "", ""] ]
+    context "#push_cell" do
+
+      Cat = Struct.new(:value)
+      grid = [ [Cat.new("cool"), "", ""], ["", "", ""], ["", "", ""] ]
+
+      it "it updates the value of the cell object at a (x,0) coordinate" do
         board = Board.new(grid: grid)
-        board.set_cell(0,0,"meow")
+        board.push_cell(0,"meow")
         expect(board.get_cell(0,0).value).to eq "meow"
       end
+
+      it "it updates the value of the cell object at a (x,1) coordinate after 2nd call to push_cell" do
+        board = Board.new(grid: grid)
+        board.push_cell(0,"meow")
+        board.push_cell(0,"bark")
+        expect(board.get_cell(0,1).value).to eq "bark"
+      end
+
     end
-=begin
+
     TestCell = Struct.new(:value)
     let(:x_cell) { TestCell.new("X") }
     let(:y_cell) { TestCell.new("Y") }
     let(:empty) { TestCell.new }
 
-
+=begin
     context "#game_over" do
       it "it returns :winner if winner? is true" do
         board = Board.new
@@ -63,7 +73,7 @@ module ConnectFour
         board.stub(:winner?) { false }
         board.stub(:draw?) { false }
         expect(board.game_over).to be_falsy
-      end      
+      end
 
       it "returns :winner when row has objects with values that are the same" do
         grid = [

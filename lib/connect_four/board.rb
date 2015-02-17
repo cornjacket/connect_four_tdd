@@ -3,6 +3,7 @@ module ConnectFour
   	attr_reader :grid
   	def initialize(input = {})
   	  @grid = input.fetch(:grid, default_grid)
+      @y_sub_x = Array.new(7,0) # there should be bounds on this, as well as accessor
   	end
 
 
@@ -10,9 +11,11 @@ module ConnectFour
       grid[y][x]
     end
 
-    def set_cell(x, y, value)
-      get_cell(x, y).value = value
+    def push_cell(x, value)
+      get_cell(x, @y_sub_x[x]).value = value
+      @y_sub_x[x] += 1
     end
+
 =begin
     def game_over
       return :winner if winner?
