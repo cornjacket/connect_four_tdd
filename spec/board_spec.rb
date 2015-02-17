@@ -30,24 +30,35 @@ module ConnectFour
 
     context "#push_cell" do
 
-      Cat = Struct.new(:value)
-      grid = [ [Cat.new("cool"), "", ""], ["", "", ""], ["", "", ""] ]
-
       it "it updates the value of the cell object at a (x,0) coordinate" do
+        Cat = Struct.new(:value)
+        grid = [ [Cat.new("cool"), "", ""], ["", "", ""], ["", "", ""] ]
         board = Board.new(grid: grid)
         board.push_cell(0,"meow")
         expect(board.get_cell(0,0).value).to eq "meow"
       end
 
       it "it updates the value of the cell object at a (x,1) coordinate after 2nd call to push_cell" do
+        Dog = Struct.new(:value)
+        grid = [ [Cat.new("cool"), "", ""], [Dog.new("cool"), "", ""], ["", "", ""] ]        
         board = Board.new(grid: grid)
         board.push_cell(0,"meow")
         board.push_cell(0,"bark")
         expect(board.get_cell(0,1).value).to eq "bark"
       end
 
-    end
+      it "it updates the value of the cell object at a (x,2) coordinate after 3rd call to push_cell" do
+        Bird = Struct.new(:value)
+        grid = [ [Cat.new("cool"), "", ""], [Dog.new("cool"), "", ""], [Bird.new("cool"), "", ""] ]          
+        board = Board.new(grid: grid)
+        board.push_cell(0,"meow")
+        board.push_cell(0,"bark")
+        board.push_cell(0,"tweet")
+        expect(board.get_cell(0,2).value).to eq "tweet"
+      end
 
+    end
+=begin
     TestCell = Struct.new(:value)
     let(:x_cell) { TestCell.new("X") }
     let(:y_cell) { TestCell.new("Y") }
