@@ -1,9 +1,10 @@
 module ConnectFour
   class Board
+    attr_accessor :y_sub_x
   	attr_reader :grid
   	def initialize(input = {})
   	  @grid = input.fetch(:grid, default_grid)
-      @y_sub_x = Array.new(7,0) # there should be bounds on this, as well as accessor
+      @y_sub_x = Array.new(7,0) # there should be bounds on this
   	end
 
 
@@ -12,8 +13,10 @@ module ConnectFour
     end
 
     def push_cell(x, value)
-      get_cell(x, @y_sub_x[x]).value = value
-      @y_sub_x[x] += 1
+      get_cell(x, y_sub_x[x]).value = value
+      y_sub_x[x] += 1
+      # after pushing, we will check if there are 4 x's in a row which include
+      # position x,y_sub_x
     end
 
 
