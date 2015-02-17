@@ -16,13 +16,22 @@ module ConnectFour
       @y_sub_x[x] += 1
     end
 
-=begin
+
     def game_over
       return :winner if winner?
       return :draw if draw?
       false
     end
 
+# placeholders til later
+   def winner?
+   end
+
+# placeholders til later
+   def draw?
+   end
+
+=begin
     def formatted_grid
     	grid.each do |row|
     		puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")

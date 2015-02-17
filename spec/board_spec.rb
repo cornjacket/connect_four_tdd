@@ -63,8 +63,9 @@ module ConnectFour
     let(:x_cell) { TestCell.new("X") }
     let(:y_cell) { TestCell.new("Y") }
     let(:empty) { TestCell.new }
+=end
 
-=begin
+
     context "#game_over" do
       it "it returns :winner if winner? is true" do
         board = Board.new
@@ -85,7 +86,7 @@ module ConnectFour
         board.stub(:draw?) { false }
         expect(board.game_over).to be_falsy
       end
-
+=begin
       it "returns :winner when row has objects with values that are the same" do
         grid = [
         [x_cell, x_cell, x_cell],
@@ -135,8 +136,8 @@ module ConnectFour
         board = Board.new(grid: grid)
         expect(board.game_over).to be_falsy
       end
-
-    end # context #game_over
 =end
+    end # context #game_over
+
   end
 end
