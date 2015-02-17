@@ -1,22 +1,26 @@
 module ConnectFour
   class Board
-    attr_accessor :y_sub_x
+    attr_accessor :y_sub_x, :max_row, :max_col, :last_move
   	attr_reader :grid
   	def initialize(input = {})
+      @max_row = 6 # these should be changeable
+      @max_col = 7 # these should be changeable      
   	  @grid = input.fetch(:grid, default_grid)
-      @y_sub_x = Array.new(7,0) # there should be bounds on this
+      @y_sub_x = Array.new(max_col,0) # there should be bounds on this
+      @last_move = nil
   	end
 
 
     def get_cell(x, y)
-      grid[y][x]
+      return grid[y][x] if (x >=0 && x <= max_col && y >= 0 && y <= max_row)
+      return :invalid
     end
 
     def push_cell(x, value)
       get_cell(x, y_sub_x[x]).value = value
+      # last move is kept to make it simpler to determine winner
+      last_move = [x, y_sub_x[x]]      
       y_sub_x[x] += 1
-      # after pushing, we will check if there are 4 x's in a row which include
-      # position x,y_sub_x
     end
 
 
@@ -56,7 +60,7 @@ module ConnectFour
     private
 
     def default_grid
-      Array.new(6) { Array.new(7) { Cell.new} }
+      Array.new(max_row) { Array.new(max_col) { Cell.new} }
     end
 =begin
     def winning_positions

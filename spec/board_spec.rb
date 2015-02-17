@@ -26,6 +26,18 @@ module ConnectFour
         board = Board.new(grid: grid)
         expect(board.get_cell(2,1)).to eq "something"
       end
+
+      it "returns :invalid if the (x,y) coordinate is out of bounds" do
+        grid = [ ["", "", "", ""], ["", "", "", ""], ["", "", "", ""] ]
+        board = Board.new(grid: grid)
+        expect(board.get_cell(-1,0)).to eq :invalid
+      end
+
+      it "returns :invalid if the (x,y) coordinate is out of bounds" do
+        grid = [ ["", "", "", ""], ["", "", "", ""], ["", "", "", ""] ]
+        board = Board.new(grid: grid)
+        expect(board.get_cell(8,0)).to eq :invalid
+      end      
     end
 
     context "#push_cell" do
