@@ -6,14 +6,14 @@ module ConnectFour
   	end
 
 
-    def cell(x, y)
+    def get_cell(x, y)
       grid[y][x]
     end
-=begin
+
     def set_cell(x, y, value)
       get_cell(x, y).value = value
     end
-
+=begin
     def game_over
       return :winner if winner?
       return :draw if draw?

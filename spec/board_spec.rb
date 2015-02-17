@@ -24,11 +24,11 @@ module ConnectFour
       it "returns the cell based on the (x,y) coordinate" do
         grid = [ ["", "", "", ""], ["", "", "something", ""], ["", "", "", ""] ]
         board = Board.new(grid: grid)
-        expect(board.cell(2,1)).to eq "something"
+        expect(board.get_cell(2,1)).to eq "something"
       end
     end
 
-    context "#set_cell" do
+    context "#cell=" do
       it "it updates the value of the cell object at a (x,y) coordinate" do
         Cat = Struct.new(:value) # what does this do?
         grid = [ [Cat.new("cool"), "", ""], ["", "", ""], ["", "", ""] ]
