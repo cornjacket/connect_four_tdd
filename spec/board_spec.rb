@@ -27,17 +27,7 @@ module ConnectFour
         expect(board.get_cell(2,1)).to eq "something"
       end
 
-      it "returns :invalid if the (x,y) coordinate is out of bounds" do
-        grid = [ ["", "", "", ""], ["", "", "", ""], ["", "", "", ""] ]
-        board = Board.new(grid: grid)
-        expect(board.get_cell(-1,0)).to eq :invalid
-      end
-
-      it "returns :invalid if the (x,y) coordinate is out of bounds" do
-        grid = [ ["", "", "", ""], ["", "", "", ""], ["", "", "", ""] ]
-        board = Board.new(grid: grid)
-        expect(board.get_cell(8,0)).to eq :invalid
-      end      
+     
     end
 
     context "#push_cell" do
@@ -70,12 +60,12 @@ module ConnectFour
       end
 
     end
-=begin
+
     TestCell = Struct.new(:value)
     let(:x_cell) { TestCell.new("X") }
     let(:y_cell) { TestCell.new("Y") }
     let(:empty) { TestCell.new }
-=end
+
 
 
     context "#game_over" do
@@ -98,17 +88,20 @@ module ConnectFour
         board.stub(:draw?) { false }
         expect(board.game_over).to be_falsy
       end
-=begin
-      it "returns :winner when row has objects with values that are the same" do
+
+      it "returns :winner when row has 4 objects with values that are the same" do
         grid = [
-        [x_cell, x_cell, x_cell],
-        [y_cell, x_cell, y_cell],
-        [y_cell, y_cell, empty]
+        [x_cell, x_cell, x_cell, empty,  empty, empty, empty],
+        [y_cell, x_cell, y_cell, empty,  empty, empty, empty],
+        [x_cell, y_cell, x_cell, empty,  empty, empty, empty],
+        [y_cell, x_cell, y_cell, empty,  empty, empty, empty],
+        [x_cell, y_cell, x_cell, empty,  empty, empty, empty],
+        [y_cell, y_cell, y_cell, y_cell, empty, empty, empty]
         ]
         board = Board.new(grid: grid)
         expect(board.game_over).to eq :winner
       end
-
+=begin
       it "returns :winner when column has objects with values that are the same" do
         grid = [
         [x_cell, x_cell, empty],

@@ -11,4 +11,5 @@ module ConnectFour
 end
 
 require_relative "./connect_four/cell.rb"
+require_relative "./connect_four/core_extensions.rb"
 require_relative "./connect_four/board.rb"

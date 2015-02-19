@@ -1,25 +1,21 @@
 module ConnectFour
   class Board
-    attr_accessor :y_sub_x, :max_row, :max_col, :last_move
+    attr_accessor :y_sub_x, :max_row, :max_col
   	attr_reader :grid
   	def initialize(input = {})
       @max_row = 6 # these should be changeable
       @max_col = 7 # these should be changeable      
   	  @grid = input.fetch(:grid, default_grid)
       @y_sub_x = Array.new(max_col,0) # there should be bounds on this
-      @last_move = nil
   	end
 
 
     def get_cell(x, y)
-      return grid[y][x] if (x >=0 && x <= max_col && y >= 0 && y <= max_row)
-      return :invalid
+      return grid[y][x]
     end
 
     def push_cell(x, value)
-      get_cell(x, y_sub_x[x]).value = value
-      # last move is kept to make it simpler to determine winner
-      last_move = [x, y_sub_x[x]]      
+      get_cell(x, y_sub_x[x]).value = value    
       y_sub_x[x] += 1
     end
 
@@ -48,31 +44,33 @@ module ConnectFour
     def draw?
       grid.flatten.map { |cell| cell.value }.none_empty?
     end
-
+=end
     def winner?
       winning_positions.each do |winning_position|
         next if winning_position_values(winning_position).all_empty?
-        return true if winning_position_values(winning_position).all_same?
+        return true if winning_position_values(winning_position).four_same?
       end
       false
     end
-=end
+
     private
 
     def default_grid
       Array.new(max_row) { Array.new(max_col) { Cell.new} }
     end
-=begin
+
+# grid needs to be decomposed into subarrays of length four.
+# four each array of 7, break into 4 subarrays of 4
     def winning_positions
-      grid + # rows
-      grid.transpose + # columns
-      diagonals # two diagonals
+      grid #+ # rows
+      #grid.transpose + # columns
+      #diagonals # two diagonals
     end
 
     def winning_position_values(winning_position)
       winning_position.map { |cell| cell.value }
     end
-
+=begin
     def diagonals
       [
         [get_cell(0,0), get_cell(1,1), get_cell(2,2)],
