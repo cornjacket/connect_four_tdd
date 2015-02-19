@@ -48,9 +48,24 @@ module ConnectFour
     def winner?
       winning_positions.each do |winning_position|
         next if winning_position_values(winning_position).all_empty?
-        return true if winning_position_values(winning_position).four_same?
+        return true if winning_position_values(winning_position).all_same?
       end
       false
+    end
+
+    def subarray(x)
+      #return nil if x.length != 7 || x.length != 6
+      #  puts "subarray length == #{x.length}"
+      #  return nil
+      #end
+      if x.length == 7
+        return [ [x[0], x[1], x[2], x[3]], [x[1], x[2], x[3], x[4]], 
+                 [x[2], x[3], x[4], x[5]], [x[3], x[4], x[5], x[6]] ]
+      elsif x.length == 6
+        return [ [x[0], x[1], x[2], x[3]], [x[1], x[2], x[3], x[4]], 
+                 [x[2], x[3], x[4], x[5]] ]
+      end
+      return nil
     end
 
     private
@@ -62,7 +77,20 @@ module ConnectFour
 # grid needs to be decomposed into subarrays of length four.
 # four each array of 7, break into 4 subarrays of 4
     def winning_positions
-      grid #+ # rows
+      t_grid = grid.transpose
+      subarray(grid[0]) +
+      subarray(grid[1]) +    
+      subarray(grid[2]) +
+      subarray(grid[3]) +    
+      subarray(grid[4]) +
+      subarray(grid[5]) +
+      subarray(t_grid[0]) +
+      subarray(t_grid[1]) +    
+      subarray(t_grid[2]) +
+      subarray(t_grid[3]) +    
+      subarray(t_grid[4]) +
+      subarray(t_grid[5])
+      #grid #+ # rows
       #grid.transpose + # columns
       #diagonals # two diagonals
     end

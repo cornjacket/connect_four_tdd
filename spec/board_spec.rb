@@ -61,11 +61,32 @@ module ConnectFour
 
     end
 
+    context "#subarray" do
+
+      it "returns nil if it is passed any array with length != 7" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5, 6]
+        expect(board.subarray(ary)).to eq nil
+      end
+
+      it "returns an array of length 4" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5, 6, 7]
+        expect(board.subarray(ary).length).to eq 4
+      end
+
+      it "returns 4 subarrays of values with incrementing start index" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5, 6, 7]
+        expect(board.subarray(ary)).to eq [ [1,2,3,4], [2,3,4,5], [3,4,5,6], [4,5,6,7] ]
+      end      
+   
+    end
+
     TestCell = Struct.new(:value)
     let(:x_cell) { TestCell.new("X") }
     let(:y_cell) { TestCell.new("Y") }
     let(:empty) { TestCell.new }
-
 
 
     context "#game_over" do
@@ -89,6 +110,7 @@ module ConnectFour
         expect(board.game_over).to be_falsy
       end
 
+
       it "returns :winner when row has 4 objects with values that are the same" do
         grid = [
         [x_cell, x_cell, x_cell, empty,  empty, empty, empty],
@@ -101,6 +123,19 @@ module ConnectFour
         board = Board.new(grid: grid)
         expect(board.game_over).to eq :winner
       end
+
+      it "returns :winner when a column has 4 objects with values that are the same" do
+        grid = [
+        [x_cell, x_cell, x_cell, empty,  empty, empty, empty],
+        [y_cell, x_cell, y_cell, empty,  empty, empty, empty],
+        [x_cell, y_cell, x_cell, empty,  empty, empty, empty],
+        [y_cell, x_cell, x_cell, empty,  empty, empty, empty],
+        [x_cell, y_cell, x_cell, empty,  empty, empty, empty],
+        [y_cell, y_cell, x_cell, y_cell, empty, empty, empty]
+        ]
+        board = Board.new(grid: grid)
+        expect(board.game_over).to eq :winner
+      end      
 =begin
       it "returns :winner when column has objects with values that are the same" do
         grid = [
