@@ -3,8 +3,8 @@ module ConnectFour
     attr_accessor :y_sub_x, :max_row, :max_col
   	attr_reader :grid
   	def initialize(input = {})
-      @max_row = 6 # these should be changeable
-      @max_col = 7 # these should be changeable      
+      @max_row = 6 # these could be changeable
+      @max_col = 7 # these could be changeable      
   	  @grid = input.fetch(:grid, default_grid)
       @y_sub_x = Array.new(max_col,0) # there should be bounds on this
   	end
@@ -120,16 +120,6 @@ module ConnectFour
         [get_cell(3,0), get_cell(4,1), get_cell(5,2), get_cell(6,3)],        
       ]
     end
-
-=begin
-    def diagonals
-      [
-        [get_cell(0,0), get_cell(1,1), get_cell(2,2)],
-        [get_cell(0,2), get_cell(1,1), get_cell(2,0)]
-      ]
-    end
-=end
-
 
   end
 
