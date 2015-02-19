@@ -82,18 +82,34 @@ module ConnectFour
 # four each array of 7, break into 4 subarrays of 4
     def winning_positions
       t_grid = grid.transpose
+      diag = diagonals
+      # rows
       subarray(grid[0]) +
       subarray(grid[1]) +    
       subarray(grid[2]) +
       subarray(grid[3]) +    
       subarray(grid[4]) +
       subarray(grid[5]) +
+      # cols
       subarray(t_grid[0]) +
       subarray(t_grid[1]) +    
       subarray(t_grid[2]) +
       subarray(t_grid[3]) +    
       subarray(t_grid[4]) +
-      subarray(t_grid[5])
+      subarray(t_grid[5]) +
+      # diags
+      subarray(diag[0]) +
+      subarray(diag[1]) +
+      subarray(diag[2]) +
+      subarray(diag[3]) +
+      subarray(diag[4]) +
+      subarray(diag[5]) +
+      subarray(diag[6]) +
+      subarray(diag[7]) +
+      subarray(diag[8]) +
+      subarray(diag[9]) +
+      subarray(diag[10]) +
+      subarray(diag[11])
       #grid #+ # rows
       #grid.transpose + # columns
       #diagonals # two diagonals
