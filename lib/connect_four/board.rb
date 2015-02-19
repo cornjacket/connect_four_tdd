@@ -40,11 +40,11 @@ module ConnectFour
     		puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
         end
     end
-
+=end
     def draw?
       grid.flatten.map { |cell| cell.value }.none_empty?
     end
-=end
+
     def winner?
       winning_positions.each do |winning_position|
         next if winning_position_values(winning_position).all_empty?
