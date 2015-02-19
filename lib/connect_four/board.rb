@@ -26,21 +26,12 @@ module ConnectFour
       false
     end
 
-# placeholders til later
-   def winner?
-   end
-
-# placeholders til later
-   def draw?
-   end
-
-=begin
     def formatted_grid
     	grid.each do |row|
     		puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
         end
     end
-=end
+
     def draw?
       grid.flatten.map { |cell| cell.value }.none_empty?
     end
@@ -53,11 +44,9 @@ module ConnectFour
       false
     end
 
+
     def subarray(x)
-      #return nil if x.length != 7 || x.length != 6
-      #  puts "subarray length == #{x.length}"
-      #  return nil
-      #end
+      # four each array of 7, break into 4 subarrays of 4
       if x.length == 7
         return [ [x[0], x[1], x[2], x[3]], [x[1], x[2], x[3], x[4]], 
                  [x[2], x[3], x[4], x[5]], [x[3], x[4], x[5], x[6]] ]
@@ -79,7 +68,6 @@ module ConnectFour
     end
 
 # grid needs to be decomposed into subarrays of length four.
-# four each array of 7, break into 4 subarrays of 4
     def winning_positions
       t_grid = grid.transpose
       diag = diagonals
@@ -110,9 +98,6 @@ module ConnectFour
       subarray(diag[9]) +
       subarray(diag[10]) +
       subarray(diag[11])
-      #grid #+ # rows
-      #grid.transpose + # columns
-      #diagonals # two diagonals
     end
 
     def winning_position_values(winning_position)
