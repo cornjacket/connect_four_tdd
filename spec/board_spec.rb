@@ -63,24 +63,54 @@ module ConnectFour
 
     context "#subarray" do
 
-      it "returns nil if it is passed any array with length != 7" do
+      it "returns nil if it is passed any array with length < 4" do
         board = Board.new
-        ary = [1, 2, 3, 4, 5, 6]
+        ary = [1, 2, 3]
         expect(board.subarray(ary)).to eq nil
       end
 
-      it "returns an array of length 4" do
+      it "returns nil if it is passed any array with length > 7" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5, 6, 7, 8]
+        expect(board.subarray(ary)).to eq nil
+      end
+
+      it "returns an array of length 1 when given array of 4 elements" do
+        board = Board.new
+        ary = [1, 2, 3, 4]
+        expect(board.subarray(ary).length).to eq 1
+      end
+
+      it "returns an array of length 2 when given array of 5 elements" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5]
+        expect(board.subarray(ary).length).to eq 2
+      end
+
+      it "returns an array of length 3 when given array of 6 elements" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5, 6]
+        expect(board.subarray(ary).length).to eq 3
+      end
+
+      it "returns an array of length 4 when given array of 7 elements" do
         board = Board.new
         ary = [1, 2, 3, 4, 5, 6, 7]
         expect(board.subarray(ary).length).to eq 4
       end
 
-      it "returns 4 subarrays of values with incrementing start index" do
+      it "returns 4 subarrays of values with incrementing start index when given array of 7 elements" do
         board = Board.new
         ary = [1, 2, 3, 4, 5, 6, 7]
         expect(board.subarray(ary)).to eq [ [1,2,3,4], [2,3,4,5], [3,4,5,6], [4,5,6,7] ]
       end      
    
+      it "returns 3 subarrays of values with incrementing start index when given array of 6 elements" do
+        board = Board.new
+        ary = [1, 2, 3, 4, 5, 6]
+        expect(board.subarray(ary)).to eq [ [1,2,3,4], [2,3,4,5], [3,4,5,6] ]
+      end
+
     end
 
     TestCell = Struct.new(:value)
@@ -137,15 +167,6 @@ module ConnectFour
         expect(board.game_over).to eq :winner
       end      
 =begin
-      it "returns :winner when column has objects with values that are the same" do
-        grid = [
-        [x_cell, x_cell, empty],
-        [y_cell, x_cell, y_cell],
-        [y_cell, x_cell, empty]
-        ]
-        board = Board.new(grid: grid)
-        expect(board.game_over).to eq :winner
-      end
 
       it "returns :winner when diagonal has objects with values that are the same" do
         grid = [
