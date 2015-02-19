@@ -6,7 +6,7 @@ module ConnectFour
       @max_row = 6 # these could be changeable
       @max_col = 7 # these could be changeable      
   	  @grid = input.fetch(:grid, default_grid)
-      @y_sub_x = Array.new(max_col,0) # there should be bounds on this
+      @y_sub_x = Array.new(max_col,5) # there should be bounds on this
   	end
 
 
@@ -16,7 +16,7 @@ module ConnectFour
 
     def push_cell(x, value)
       get_cell(x, y_sub_x[x]).value = value    
-      y_sub_x[x] += 1
+      y_sub_x[x] -= 1
     end
 
 
